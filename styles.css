@@ -43,7 +43,7 @@ h1, h2, h3, p { margin: 0; }
 .track-item ul { margin: 0.6rem 0 0; padding-left: 1rem; color: var(--muted); }
 .track-item li { margin-bottom: 0.4rem; }
 
-.focus-grid { margin-top: 0.8rem; display: grid; gap: 0.7rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.focus-grid { margin-top: 0.8rem; display: grid; gap: 0.7rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .focus-grid h3 { margin-top: 0.35rem; font-size: 1rem; }
 
 .lesson-list, .quest-list { margin-top: 1rem; display: grid; gap: 0.7rem; }
@@ -67,7 +67,7 @@ h1, h2, h3, p { margin: 0; }
 .skill-card { border-radius: 14px; padding: 0.8rem; border: 1px solid #d8e9f8; background: #f9fcff; }
 .skill-level { display: inline-block; margin-top: 0.45rem; font-size: 0.8rem; font-weight: 700; color: #1272b5; background: #e2f2ff; padding: 0.2rem 0.4rem; border-radius: 8px; }
 
-.sources-list { margin-top: 1rem; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.7rem; }
+.sources-list { margin-top: 1rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }
 .source-item { display: grid; gap: 0.35rem; text-decoration: none; color: inherit; border: 1px solid #d8e9f8; border-radius: 12px; padding: 0.8rem; background: #f9fcff; }
 .source-item span { color: var(--muted); font-size: 0.9rem; }
 
