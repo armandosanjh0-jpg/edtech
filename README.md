@@ -9,6 +9,7 @@ A Duolingo-inspired web app concept for learning AI tools and skills daily, with
 - Role-based lesson personalization for executives, entrepreneurs, and builders
 - Up-to-date lesson rotation including MCP servers and Openclaw concepts
 - Streak tracking and reward loops (XP, gems, hearts, quests, chest)
+- Proper grading rubric for quests: Bronze/Silver/Gold with multiplier-based rewards
 - Curated links to external AI sources and platforms
 
 ## Run locally

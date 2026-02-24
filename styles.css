@@ -60,6 +60,17 @@ h1, h2, h3, p { margin: 0; }
 .quest-item { display: flex; justify-content: space-between; align-items: center; border: 1px dashed #bfddf2; border-radius: 12px; padding: 0.7rem; font-size: 0.95rem; }
 .quest-item.done { background: #ebffe0; border-style: solid; }
 
+.grade-pill {
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+}
+
+.grade-pill.gold { background: #fff3c4; color: #9a6a00; }
+.grade-pill.silver { background: #edf2f7; color: #34495e; }
+.grade-pill.bronze { background: #fce7d2; color: #8a4b15; }
+.grade-pill.unranked { background: #f0f4f8; color: #667; }
+
 .progress-track { margin: 1rem 0; width: 100%; height: 16px; border-radius: 999px; background: #e3f0fb; overflow: hidden; }
 .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #ffd166, var(--gold)); transition: width 0.3s ease; }
 

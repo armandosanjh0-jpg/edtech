@@ -63,9 +63,9 @@ const sources = [
 ];
 
 const questConfig = [
-  { id: 'one-lesson', label: 'Finish 1 lesson', reward: 10, check: () => state.lessonsCompleted >= 1 },
-  { id: 'two-lessons', label: 'Finish 2 lessons', reward: 15, check: () => state.lessonsCompleted >= 2 },
-  { id: 'earn-60xp', label: 'Earn 60 XP', reward: 20, check: () => state.xp >= 60 },
+  { id: 'one-lesson', label: 'Finish 1 lesson', reward: 10, target: () => 1, progress: () => state.lessonsCompleted },
+  { id: 'two-lessons', label: 'Finish 2 lessons', reward: 15, target: () => 2, progress: () => state.lessonsCompleted },
+  { id: 'earn-60xp', label: 'Earn 60 XP', reward: 20, target: () => 60, progress: () => state.xp },
 ];
 
 const els = {
@@ -110,11 +110,25 @@ function buildLessonsForDay(day, role) {
   };
 
   return [
-    { title: `Day ${day}: ${row.theme}`, topic: row.core, duration: '7 min', xp: 25, audience: row.level.toLowerCase() },
-    { title: `${row.concept} Drill`, topic: `Hands-on ${row.concept}`, duration: '8 min', xp: 30, audience: 'all' },
-    { title: `Role Mission`, topic: roleTask[role] || roleTask.builder, duration: '6 min', xp: 25, audience: role || 'all' },
-    { title: 'Reflection + Action', topic: 'Apply today in your real workflow', duration: '5 min', xp: 20, audience: 'all' },
+    { title: `Day ${day}: ${row.theme}`, topic: row.core, duration: '7 min', xp: 25 },
+    { title: `${row.concept} Drill`, topic: `Hands-on ${row.concept}`, duration: '8 min', xp: 30 },
+    { title: 'Role Mission', topic: roleTask[role] || roleTask.builder, duration: '6 min', xp: 25 },
+    { title: 'Reflection + Action', topic: 'Apply today in your real workflow', duration: '5 min', xp: 20 },
   ];
+}
+
+function gradeFromPercent(percent) {
+  if (percent >= 100) return { tier: 'Gold', multiplier: 1.6, icon: '🥇' };
+  if (percent >= 70) return { tier: 'Silver', multiplier: 1.3, icon: '🥈' };
+  if (percent >= 40) return { tier: 'Bronze', multiplier: 1.0, icon: '🥉' };
+  return { tier: 'Unranked', multiplier: 0, icon: '⬜' };
+}
+
+function getQuestGrade(quest) {
+  const progress = quest.progress();
+  const target = quest.target();
+  const percent = Math.min(100, Math.round((progress / target) * 100));
+  return { ...gradeFromPercent(percent), percent, progress, target };
 }
 
 function generateDailyLessons() {
@@ -261,10 +275,14 @@ function renderSources() {
 function renderQuests() {
   els.quests.innerHTML = '';
   questConfig.forEach((quest) => {
+    const grade = getQuestGrade(quest);
     const item = document.createElement('li');
-    const done = quest.check();
-    item.className = `quest-item${done ? ' done' : ''}`;
-    item.innerHTML = `<span>${done ? '✅' : '⬜'} ${quest.label}</span><strong>+${quest.reward} gems</strong>`;
+    item.className = `quest-item${grade.percent >= 100 ? ' done' : ''}`;
+
+    item.innerHTML = `
+      <span>${grade.icon} ${quest.label} (${grade.progress}/${grade.target})</span>
+      <strong class="grade-pill ${grade.tier.toLowerCase()}">${grade.tier} • ${grade.percent}%</strong>
+    `;
     els.quests.appendChild(item);
   });
 }
@@ -273,12 +291,16 @@ function claimQuests() {
   if (requireLogin()) return;
   if (state.questsClaimedToday) return void (els.chestLog.textContent = 'You already claimed your quest rewards today.');
 
-  const reward = questConfig.filter((q) => q.check()).reduce((sum, q) => sum + q.reward, 0);
-  if (!reward) return void (els.chestLog.textContent = 'Complete at least one quest first to claim rewards.');
+  const reward = questConfig.reduce((sum, quest) => {
+    const grade = getQuestGrade(quest);
+    return sum + Math.round(quest.reward * grade.multiplier);
+  }, 0);
+
+  if (!reward) return void (els.chestLog.textContent = 'Reach at least Bronze on one quest to claim rewards.');
 
   state.gems += reward;
   state.questsClaimedToday = true;
-  els.chestLog.textContent = `Claimed ${reward} gems from daily quests. Keep your streak alive!`;
+  els.chestLog.textContent = `Claimed ${reward} gems using rubric grades (Bronze/Silver/Gold).`;
   updateUI();
 }
 
