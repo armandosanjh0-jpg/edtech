@@ -6,19 +6,19 @@ const curriculum = [
   { day: 3, level: 'Beginner', theme: 'Research Skills', core: 'Fast market and topic research', concept: 'AI agents' },
   { day: 4, level: 'Beginner', theme: 'Output Quality', core: 'Hallucination checks', concept: 'verification loops' },
   { day: 5, level: 'Beginner', theme: 'Content Ops', core: 'Daily content production', concept: 'workflow batching' },
-  { day: 6, level: 'Beginner', theme: 'No-code Automation', core: 'Simple automations', concept: 'zap-style flows' },
+  { day: 6, level: 'Beginner', theme: 'Build Apps with Cursor', core: 'Ship your first AI app idea in Cursor', concept: 'cursor prompts' },
   { day: 7, level: 'Beginner', theme: 'Weekly Review', core: 'Score and reflect', concept: 'retrospective' },
   { day: 8, level: 'Intermediate', theme: 'Model Selection', core: 'Choosing the right model', concept: 'latency vs quality' },
   { day: 9, level: 'Intermediate', theme: 'MCP Servers I', core: 'Why MCP matters', concept: 'MCP servers' },
   { day: 10, level: 'Intermediate', theme: 'Tool Use', core: 'Agent + tools orchestration', concept: 'tool calling' },
-  { day: 11, level: 'Intermediate', theme: 'Openclaw Intro', core: 'Openclaw ecosystem overview', concept: 'Openclaw' },
+  { day: 11, level: 'Intermediate', theme: 'Lovable MVP Sprint', core: 'Build and deploy product ideas in Lovable', concept: 'lovable prompts' },
   { day: 12, level: 'Intermediate', theme: 'Data Handling', core: 'Chunking and retrieval', concept: 'RAG basics' },
   { day: 13, level: 'Intermediate', theme: 'Memory Patterns', core: 'Session and long-term memory', concept: 'memory design' },
   { day: 14, level: 'Intermediate', theme: 'Weekly Review', core: 'Skill checkpoint', concept: 'gap analysis' },
   { day: 15, level: 'Intermediate', theme: 'MCP Servers II', core: 'Secure connector strategy', concept: 'MCP governance' },
   { day: 16, level: 'Intermediate', theme: 'Automation Reliability', core: 'Retries and alerts', concept: 'runbooks' },
-  { day: 17, level: 'Intermediate', theme: 'Multimodal Apps', core: 'Vision/audio workflows', concept: 'multimodal pipelines' },
-  { day: 18, level: 'Intermediate', theme: 'Cost Management', core: 'Token economics', concept: 'cost controls' },
+  { day: 17, level: 'Intermediate', theme: 'AI Image Prompts', core: 'Generate high-quality images with strong prompt structure', concept: 'image prompting' },
+  { day: 18, level: 'Intermediate', theme: 'AI Video Prompts', core: 'Create product videos with cinematic prompt templates', concept: 'video prompting' },
   { day: 19, level: 'Intermediate', theme: 'Openclaw Build', core: 'Implementing a useful flow', concept: 'Openclaw project' },
   { day: 20, level: 'Intermediate', theme: 'Team Adoption', core: 'Rollout and training', concept: 'change management' },
   { day: 21, level: 'Advanced', theme: 'AI Architecture', core: 'System-level design', concept: 'LLMOps' },
@@ -60,6 +60,10 @@ const sources = [
   { name: 'Hugging Face', type: 'Models & datasets', url: 'https://huggingface.co/' },
   { name: 'MCP Official', type: 'Model Context Protocol', url: 'https://modelcontextprotocol.io/' },
   { name: 'OpenClaw GitHub', type: 'Openclaw ecosystem', url: 'https://github.com/' },
+  { name: 'Cursor', type: 'AI app builder IDE', url: 'https://www.cursor.com/' },
+  { name: 'Lovable', type: 'AI product builder', url: 'https://lovable.dev/' },
+  { name: 'Leonardo AI', type: 'AI image generation', url: 'https://leonardo.ai/' },
+  { name: 'Runway', type: 'AI video generation', url: 'https://runwayml.com/' },
 ];
 
 const questConfig = [
@@ -105,8 +109,8 @@ function buildLessonsForDay(day, role) {
   const row = curriculum[day - 1];
   const roleTask = {
     executive: 'Executive brief: risk + KPI impact',
-    entrepreneur: 'Founder sprint: ship a market-ready experiment',
-    builder: 'Builder lab: implement and test the workflow',
+    entrepreneur: 'Founder sprint: ship a market-ready experiment with Cursor/Lovable',
+    builder: 'Builder lab: implement with Cursor and polish with image/video AI prompts',
   };
 
   return [
@@ -243,7 +247,8 @@ function renderLessons() {
     const button = clone.querySelector('button');
 
     title.textContent = lesson.title;
-    detail.textContent = `${lesson.duration} • ${lesson.topic}`;
+    const promptHint = lesson.title.toLowerCase().includes('prompt') ? ' • Use: role + context + constraints + output format' : '';
+    detail.textContent = `${lesson.duration} • ${lesson.topic}${promptHint}`;
     tag.textContent = `+${lesson.xp} XP`;
     button.addEventListener('click', () => completeLesson(lesson, button));
 

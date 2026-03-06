@@ -43,6 +43,9 @@ h1, h2, h3, p { margin: 0; }
 .track-item ul { margin: 0.6rem 0 0; padding-left: 1rem; color: var(--muted); }
 .track-item li { margin-bottom: 0.4rem; }
 
+.build-list { margin: 0.8rem 0 0; padding-left: 1rem; color: var(--muted); }
+.build-list li { margin-bottom: 0.45rem; }
+
 .focus-grid { margin-top: 0.8rem; display: grid; gap: 0.7rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .focus-grid h3 { margin-top: 0.35rem; font-size: 1rem; }
 
