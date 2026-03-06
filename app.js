@@ -20,14 +20,14 @@ const curriculum = [
   { day: 17, level: 'Intermediate', theme: 'AI Image Prompts', core: 'Generate high-quality images with strong prompt structure', concept: 'image prompting' },
   { day: 18, level: 'Intermediate', theme: 'AI Video Prompts', core: 'Create product videos with cinematic prompt templates', concept: 'video prompting' },
   { day: 19, level: 'Intermediate', theme: 'Openclaw Build', core: 'Implementing a useful flow', concept: 'Openclaw project' },
-  { day: 20, level: 'Intermediate', theme: 'Team Adoption', core: 'Rollout and training', concept: 'change management' },
+  { day: 20, level: 'Intermediate', theme: 'WARP Terminal Workflows', core: 'Speed up dev loops with Warp + AI command planning', concept: 'WARP automation' },
   { day: 21, level: 'Advanced', theme: 'AI Architecture', core: 'System-level design', concept: 'LLMOps' },
   { day: 22, level: 'Advanced', theme: 'Evaluation', core: 'Automated eval suites', concept: 'benchmarking' },
   { day: 23, level: 'Advanced', theme: 'Safety and Policy', core: 'Guardrails and policy', concept: 'governance' },
   { day: 24, level: 'Advanced', theme: 'MCP Servers III', core: 'Production MCP patterns', concept: 'MCP scaling' },
-  { day: 25, level: 'Advanced', theme: 'Growth Systems', core: 'AI-driven growth loops', concept: 'experimentation' },
-  { day: 26, level: 'Advanced', theme: 'Executive Reporting', core: 'KPI narrative and ROI', concept: 'stakeholder alignment' },
-  { day: 27, level: 'Advanced', theme: 'Founder Execution', core: '0→1 AI product launch', concept: 'ship cycles' },
+  { day: 25, level: 'Advanced', theme: 'Advanced Agent Stack', core: 'Multi-agent orchestration with LangGraph and memory', concept: 'agent graph design' },
+  { day: 26, level: 'Advanced', theme: 'Realtime AI Apps', core: 'Build realtime copilots with streaming + eval loops', concept: 'realtime architecture' },
+  { day: 27, level: 'Advanced', theme: 'RAG at Scale', core: 'Hybrid retrieval and reranking for production apps', concept: 'scalable RAG' },
   { day: 28, level: 'Advanced', theme: 'Openclaw Advanced', core: 'Composable advanced flows', concept: 'Openclaw scaling' },
   { day: 29, level: 'Advanced', theme: 'Capstone Build', core: 'Build your AI operating system', concept: 'capstone' },
   { day: 30, level: 'Advanced', theme: 'Graduation Sprint', core: 'Final assessment + roadmap', concept: 'next 90 days' },
@@ -64,6 +64,9 @@ const sources = [
   { name: 'Lovable', type: 'AI product builder', url: 'https://lovable.dev/' },
   { name: 'Leonardo AI', type: 'AI image generation', url: 'https://leonardo.ai/' },
   { name: 'Runway', type: 'AI video generation', url: 'https://runwayml.com/' },
+  { name: 'Warp', type: 'AI terminal for developers', url: 'https://www.warp.dev/' },
+  { name: 'LangGraph', type: 'Advanced agent orchestration', url: 'https://langchain-ai.github.io/langgraph/' },
+  { name: 'Vercel AI SDK', type: 'Production-grade AI app stack', url: 'https://sdk.vercel.ai/' },
 ];
 
 const questConfig = [
@@ -108,9 +111,9 @@ function currentCurriculumDay() {
 function buildLessonsForDay(day, role) {
   const row = curriculum[day - 1];
   const roleTask = {
-    executive: 'Executive brief: risk + KPI impact',
+    executive: 'Executive brief: risk + KPI impact using advanced AI ops dashboards',
     entrepreneur: 'Founder sprint: ship a market-ready experiment with Cursor/Lovable',
-    builder: 'Builder lab: implement with Cursor and polish with image/video AI prompts',
+    builder: 'Builder lab: implement with Cursor + Warp, then polish with image/video AI prompts',
   };
 
   return [
