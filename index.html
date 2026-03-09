@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Quest — Daily AI Tools & Skills</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar card">
+        <div>
+          <p class="eyebrow">Daily AI learning, Duolingo style</p>
+          <h1>AI Quest</h1>
+          <p id="user-greeting" class="muted"></p>
+        </div>
+
+        <div class="auth-area">
+          <form id="login-form" class="login-form" autocomplete="on">
+            <label class="sr-only" for="username">Username</label>
+            <input id="username" name="username" type="text" minlength="2" placeholder="Username" required />
+            <label class="sr-only" for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Email" required />
+            <select id="role" name="role" required>
+              <option value="">Choose role</option>
+              <option value="executive">Executive</option>
+              <option value="entrepreneur">Entrepreneur</option>
+              <option value="builder">Builder</option>
+            </select>
+            <button type="submit" class="btn secondary">Log In</button>
+          </form>
+          <button id="logout-btn" class="btn danger" hidden>Log Out</button>
+        </div>
+
+        <div class="stats">
+          <div class="pill">🔥 <span id="streak-count">0</span> day streak</div>
+          <div class="pill">⭐ <span id="xp-count">0</span> XP</div>
+          <div class="pill">❤️ <span id="hearts-count">5</span> hearts</div>
+          <div class="pill">💎 <span id="gems-count">20</span> gems</div>
+        </div>
+      </header>
+
+      <main class="grid">
+        <section class="card tutor-card">
+          <h2>Personal AI Tutor</h2>
+          <p id="tutor-message" class="muted">Log in and your tutor will generate a personalized focus plan.</p>
+          <div class="tutor-actions">
+            <button id="refresh-lessons" class="btn secondary">Refresh Today’s Live Lessons</button>
+            <span id="lesson-date" class="pill"></span>
+          </div>
+          <p id="login-hint" class="muted emphasis">Log in to start lessons and grow your streak.</p>
+        </section>
+
+        <section class="card">
+          <h2>Personalization & Momentum</h2>
+          <div class="focus-grid">
+            <div>
+              <p class="muted">Current role focus</p>
+              <h3 id="focus-role">Guest</h3>
+            </div>
+            <div>
+              <p class="muted">Next reward milestone</p>
+              <h3 id="next-milestone">50 XP</h3>
+            </div>
+            <div>
+              <p class="muted">Curriculum progress</p>
+              <h3 id="curriculum-day">Day 1/30</h3>
+            </div>
+            <div>
+              <p class="muted">Motivation boost</p>
+              <h3 id="motivation-line">Start a lesson to build momentum.</h3>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="card">
+          <h2>Build Your Ideas Fast</h2>
+          <p class="muted">Learn practical app building with Cursor/Lovable, advanced dev workflows with Warp, then create launch assets using AI image/video prompts.</p>
+          <ul class="build-list">
+            <li><strong>App Build:</strong> Turn product ideas into working prototypes using Cursor and Lovable.</li>
+            <li><strong>Image Prompting:</strong> Use role + style + scene + constraints for reliable outputs.</li>
+            <li><strong>Video Prompting:</strong> Define shot list, camera motion, mood, and CTA for product videos.</li>
+            <li><strong>Advanced Stack:</strong> Use Warp, LangGraph, and Vercel AI SDK for production-grade apps.</li>
+          </ul>
+        </section>
+
+        <section class="card track-card">
+          <h2>Specialized Tracks</h2>
+          <div class="track-grid">
+            <article class="track-item">
+              <h3>For Executives</h3>
+              <ul>
+                <li>AI strategy, governance, and risk management</li>
+                <li>MCP servers for secure tool orchestration</li>
+                <li>Board-level AI KPI dashboards and ROI storytelling</li>
+              </ul>
+            </article>
+            <article class="track-item">
+              <h3>For Entrepreneurs</h3>
+              <ul>
+                <li>Rapid MVPs with agentic workflows</li>
+                <li>Openclaw and open-source tooling decisions</li>
+                <li>Customer support and growth automations</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>Today’s Learning Path</h2>
+          <p class="muted">Complete short daily lessons to keep your streak and unlock rewards.</p>
+          <div id="lessons" class="lesson-list"></div>
+        </section>
+
+        <section class="card">
+          <h2>Daily Quests</h2>
+          <p class="muted">Rubric: Bronze (40%+), Silver (70%+), Gold (100%) with boosted gem payouts.</p>
+          <ul id="quests" class="quest-list"></ul>
+          <button id="claim-quest" class="btn secondary">Claim Completed Quests</button>
+        </section>
+
+        <section class="card">
+          <h2>Rewards Chest</h2>
+          <p class="muted">Every 50 XP unlocks a chest. Open it to collect gems and multipliers.</p>
+          <div class="progress-track">
+            <div id="chest-progress" class="progress-bar"></div>
+          </div>
+          <button id="open-chest" class="btn" disabled>Open Chest</button>
+          <p id="chest-log" class="muted"></p>
+        </section>
+
+        <section class="card">
+          <h2>Skill Arena</h2>
+          <p class="muted">Build practical AI power-ups with daily practice categories.</p>
+          <div id="skills" class="skill-grid"></div>
+        </section>
+
+        <section class="card sources-card">
+          <h2>AI Sources to Explore</h2>
+          <p class="muted">Use these trusted tools and learning hubs to practice outside your quests.</p>
+          <div id="sources" class="sources-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <template id="lesson-template">
+      <article class="lesson">
+        <div>
+          <h3></h3>
+          <p class="muted"></p>
+        </div>
+        <div class="lesson-meta">
+          <span class="tag"></span>
+          <button class="btn">Start</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
